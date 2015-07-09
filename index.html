@@ -1,11 +1,22 @@
 <html>
   <head>
     <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
   </head>
   <body>
+    <input type='text' id='nameInput' placeholder='Name'>
+    <input type='text' id='messageInput' placeholder='Message'>
     <script>
-      // created a reference to the root of my Firebase database
-      var myDataRef = new Firebase('https://intense-torch-3575.firebaseio.com/');
+// created a reference to the root of my Firebase database
+var myDataRef = new Firebase('https://intense-torch-3575.firebaseio.com/');
+$('#messageInput').keypress(function (e) {
+  if (e.keyCode == 13) {
+    var name = $('#nameInput').val();
+    var text = $('#messageInput').val();
+    myDataRef.set('User ' + name + ' says ' + text);
+    $('#messageInput').val('');
+  }
+});
     </script>
   </body>
 </html>
